@@ -19,7 +19,12 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'active_model_serializers', '~> 0.10.0', github: 'rails-api/active_model_serializers', branch: '0-10-stable'
 gem 'active_shotgun', '>= 0.0.4'
+gem "interactor"
+gem "interactor-contracts"
+gem 'kaminari'
+gem 'oj'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

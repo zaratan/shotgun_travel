@@ -6,5 +6,11 @@ class Shot
   has_many :assets
 
   belongs_to :project
-  validate :project_id, presence: true
+  validates :project_id, presence: true
+
+  alias_method :url, :sg_image_url
+  alias_method :url=, :sg_image_url=
+
+  alias_method :title, :code
+  alias_method :title=, :code=
 end

@@ -4,7 +4,10 @@ class Asset
   include ActiveShotgun::Model
 
   belongs_to :project
-  validate :project_id, presence: true
+  validates :project_id, presence: true
 
   has_many :shots
+
+  alias_method :title, :code
+  alias_method :title=, :code=
 end
