@@ -1,4 +1,6 @@
 class TripsController < ApplicationController
+  skip_forgery_protection
+
   def create
     asset = Asset.create!(create_params)
     render json: asset, root: 'trip'

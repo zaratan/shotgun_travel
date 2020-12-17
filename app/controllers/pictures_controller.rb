@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  skip_forgery_protection
+
   def create
     shot = Shot.create!(create_params)
     render json: shot, root: 'picture'
