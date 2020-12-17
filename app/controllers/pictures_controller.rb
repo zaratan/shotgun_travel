@@ -3,6 +3,7 @@ class PicturesController < ApplicationController
 
   def create
     shot = Shot.create!(create_params)
+    shot.assets << trip
     render json: shot, root: 'picture'
   end
 
@@ -19,7 +20,14 @@ class PicturesController < ApplicationController
 
   def create_params
     @create_params ||=
-      params.require(:picture).permit(:title, :description, :url).merge(project_id: 155)
+      begin
+        params_for_create = params.require(:picture).permit(:title, :description, :url).merge(project_id: 155)
+        params_for_create[:code] = params_for_create[:title]
+        params_for_create.delete(:title)
+        params_for_create[:sg_image_url] = params_for_create[:url]
+        params_for_create.delete(:url)
+        params_for_create
+      end
   end
 
   def trip

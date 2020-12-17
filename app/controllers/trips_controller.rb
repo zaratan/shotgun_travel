@@ -11,7 +11,7 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    Asset.delete(params[:id])
+    Asset.find(params[:id]).destroy
     head :ok
   end
 
@@ -30,11 +30,21 @@ class TripsController < ApplicationController
 
   def create_params
     @create_params ||=
-      params.require(:trip).permit(:description, :title).merge(project_id: 155)
+      begin
+        params_for_create = params.require(:trip).permit(:description, :title).merge(project_id: 155)
+        params_for_create[:code] = params_for_create[:title]
+        params_for_create.delete(:title)
+        params_for_create
+      end
   end
 
   def update_params
     @update_params ||=
-      params.require(:trip).permit(:description, :title)
+      begin
+        params_for_update = params.require(:trip).permit(:description, :title)
+        params_for_update[:code] = params_for_update[:title] if params_for_update[:title]
+        params_for_update.delete(:title)
+        params_for_update
+      end
   end
 end
