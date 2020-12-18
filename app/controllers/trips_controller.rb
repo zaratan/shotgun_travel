@@ -23,7 +23,7 @@ class TripsController < ApplicationController
 
   def show
     asset = Asset.find(params[:id])
-    render json: asset, root: 'trip'
+    render json: asset, root: 'trip', serializer: AssetFullSerializer
   end
 
   private
